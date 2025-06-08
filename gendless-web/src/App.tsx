@@ -10,16 +10,16 @@ function App() {
   return (
     <>
       <div>
-        <a href="https://vite.dev" target="_blank">
+        <a href="https://vite.dev" target="_blank" rel="noreferrer noopener">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
-        <a href="https://react.dev" target="_blank">
+        <a href="https://react.dev" target="_blank" rel="noreferrer noopener">
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button type='button' onClick={() => {setCount((count) => {return count + 1})}}>
           count is {count}
         </button>
         <p>
@@ -28,10 +28,14 @@ function App() {
       </div>
       <div className="card">
         <button
+          type='button'
           onClick={() => {
             fetch("/api/hono")
               .then((res) => res.json() as Promise<{ name: string }>)
-              .then((data) => setName(data.name));
+              .then((data) => { setName(data.name); })
+              .catch((err: unknown) => {
+                console.error("Error fetching name:", err);
+              });
           }}
           aria-label="get name"
         >
