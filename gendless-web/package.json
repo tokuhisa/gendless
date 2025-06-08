@@ -8,9 +8,12 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "npm run build && wrangler deploy"
+    "deploy": "npm run build && wrangler deploy",
+    "build:api-worker": "cd ../gendless-api-worker && npm run build",
+    "install:api-worker": "npm run uninstall gendless-api-worker && npm run build:api-worker && npm install ../gendless-api-worker --install-links"
   },
   "dependencies": {
+    "gendless-api-worker": "file:../gendless-api-worker",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

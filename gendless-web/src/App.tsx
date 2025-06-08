@@ -26,10 +26,10 @@ function App() {
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </div>
-            <div className="card">
+      <div className="card">
         <button
           onClick={() => {
-            fetch("/api/")
+            fetch("/api/hono")
               .then((res) => res.json() as Promise<{ name: string }>)
               .then((data) => setName(data.name));
           }}
