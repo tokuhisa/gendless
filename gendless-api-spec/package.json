@@ -2,6 +2,10 @@
   "name": "gendless-api-spec",
   "version": "0.1.0",
   "type": "module",
+  "scripts": {
+    "build": "npm run tsp:compile",
+    "tsp:compile": "tsp compile ."
+  },
   "peerDependencies": {
     "@typespec/compiler": "latest",
     "@typespec/http": "latest",
