@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "build": "npm run tsp:compile",
-    "tsp:compile": "tsp compile ."
+    "build": "npm run tsp:compile && npm run generate-swagger",
+    "tsp:compile": "tsp compile .",
+    "generate-swagger": "node scripts/generate-swagger-html.js"
   },
   "peerDependencies": {
     "@typespec/compiler": "latest",
