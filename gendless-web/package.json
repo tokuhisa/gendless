@@ -10,8 +10,8 @@
     "lint:fix": "eslint . --fix",
     "preview": "vite preview",
     "deploy": "npm run build && wrangler deploy",
-    "build:api-worker": "npm --prefix ../gendless-api-worker run build",
-    "install:api-worker": "npm uninstall gendless-api-worker && npm run build:api-worker && npm install ../gendless-api-worker --install-links"
+    "build:api-worker": "npm --prefix \"../gendless-api-worker\" run build",
+    "install:api-worker": "npm uninstall gendless-api-worker && npm run build:api-worker && npm install \"../gendless-api-worker\" --install-links"
   },
   "dependencies": {
     "gendless-api-worker": "file:../gendless-api-worker",
