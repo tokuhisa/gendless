@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "npm run tsp:compile && npm run generate-swagger",
-    "tsp:compile": "tsp compile .",
+    "tsp:compile": "tsp compile src",
     "generate-swagger": "node scripts/generate-swagger-html.js"
   },
   "peerDependencies": {
