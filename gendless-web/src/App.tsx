@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { MarkdownView } from './MarkdownView';
 
 
 function App() {
@@ -6,6 +7,22 @@ function App() {
 
   return (
     <>
+      <MarkdownView text={`
+# Markdown Example
+
+::::mycomponent{prop1="hoge" prop2="fuga"}
+
+:::mycomponent{prop1="bar" prop2="baz"}
+test
+
+* item1
+* item2
+* item3
+
+:::
+
+::::
+      `} />
       <button
         type='button'
         onClick={() => {

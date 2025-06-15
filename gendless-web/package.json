@@ -16,14 +16,21 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.10",
     "gendless-api-worker": "file:../gendless-api-worker",
+    "hastscript": "^9.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "tailwindcss": "^4.1.10"
+    "rehype-react": "^8.0.0",
+    "remark-directive": "^4.0.0",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
+    "tailwindcss": "^4.1.10",
+    "unified": "^11.0.5"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.5.0",
     "@cloudflare/workers-types": "^4.20250607.0",
     "@eslint/js": "^9.25.0",
+    "@tailwindcss/typography": "^0.5.16",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react-swc": "^3.9.0",
