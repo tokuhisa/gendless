@@ -5,4 +5,11 @@
     "not_found_handling": "single-page-application",
   },
   "main": "./worker/index.ts",
+
+  "r2_buckets": [
+    {
+      "binding": "GENDLESS_BUCKET",
+      "bucket_name": "gendless",
+    },
+  ],
 }

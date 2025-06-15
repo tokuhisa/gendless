@@ -7,7 +7,7 @@ import remarkRehype from "remark-rehype";
 import { visit } from "unist-util-visit";
 import remarkDirective from "remark-directive";
 import { h } from "hastscript";
-import type {Root} from 'mdast'
+import type { Root } from "mdast";
 
 function directiveHandler() {
   /**

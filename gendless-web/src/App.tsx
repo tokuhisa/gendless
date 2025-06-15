@@ -3,27 +3,11 @@ import { MarkdownView } from "./MarkdownView";
 
 function App() {
   const [name, setName] = useState("unknown");
+  const [text, setText] = useState("markdown text");
 
   return (
     <>
-      <MarkdownView
-        text={`
-# Markdown Example
-
-::::mycomponent{prop1="hoge" prop2="fuga"}
-
-:::mycomponent{prop1="bar" prop2="baz"}
-test
-
-* item1
-* item2
-* item3
-
-:::
-
-::::
-      `}
-      />
+      <MarkdownView text={text} />
       <button
         type="button"
         onClick={() => {
@@ -39,6 +23,21 @@ test
         aria-label="get name"
       >
         Name from API is: {name}
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          fetch("/api/documents/example.md")
+            .then((res) => res.text())
+            .then((data) => {
+              setText(data);
+            })
+            .catch((err: unknown) => {
+              console.error("Error fetching markdown text:", err);
+            });
+        }}
+      >
+        Set Markdown Text
       </button>
     </>
   );

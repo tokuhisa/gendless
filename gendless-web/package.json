@@ -5,15 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "npm run build:api-worker && tsc -b && vite build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "preview": "vite preview",
     "deploy": "npm run build && wrangler deploy",
-    "build:api-worker": "npm --prefix \"../gendless-api-worker\" run build",
-    "install:api-worker": "npm uninstall gendless-api-worker && npm run build:api-worker && npm install \"../gendless-api-worker\" --install-links"
+    "build:api-worker": "npm run rm:api-worker && npm --prefix \"../gendless-api-worker\" run build && npm install",
+    "rm:api-worker": "node -e 'fs.rmSync(`node_modules/gendless-api-worker`, {recursive:true, force:true})'",
+    "install:api-worker": "npm install \"../gendless-api-worker\" --link"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.10",

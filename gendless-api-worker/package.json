@@ -4,12 +4,14 @@
   "types": "dist/index.d.ts",
   "private": true,
   "scripts": {
-    "build": "tsc"
+    "build": "npm run cf-typegen && tsc",
+    "cf-typegen": "wrangler types src/worker-configuration.d.ts --env-interface CloudflareBindings --config ../gendless-web/wrangler.jsonc"
   },
   "dependencies": {
     "hono": "^4.7.11"
   },
   "devDependencies": {
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "wrangler": "^4.20.0"
   }
 }
