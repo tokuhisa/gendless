@@ -6,17 +6,8 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { visit } from "unist-util-visit";
 import remarkDirective from "remark-directive";
-import type { Node } from "unist";
 import { h } from "hastscript";
-
-type MdNode = Node & {
-  name?: string;
-  attributes?: Record<string, string>;
-  data?: {
-    hName?: string;
-    hProperties?: Record<string, unknown>;
-  };
-};
+import type {Root} from 'mdast'
 
 function directiveHandler() {
   /**
@@ -25,7 +16,7 @@ function directiveHandler() {
    * @returns {undefined}
    *   Nothing.
    */
-  return function (tree: MdNode) {
+  return function (tree: Root) {
     visit(tree, function (node) {
       if (
         node.type === "containerDirective" ||
