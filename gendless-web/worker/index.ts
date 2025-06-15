@@ -16,5 +16,5 @@
 //   },
 // } satisfies ExportedHandler<Env>;
 
-import app from "gendless-api-worker"
+import app from "gendless-api-worker";
 export default app;

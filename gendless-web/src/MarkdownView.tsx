@@ -1,85 +1,95 @@
-import { createElement, Fragment, useEffect, useState } from "react"
-import rehypeReact from "rehype-react"
-import { unified } from "unified"
-import production from 'react/jsx-runtime'
-import remarkParse from "remark-parse"
-import remarkRehype from "remark-rehype"
-import { visit } from 'unist-util-visit'
-import remarkDirective from "remark-directive"
-import type { Node } from "unist"
-import { h } from 'hastscript'
+import { createElement, Fragment, useEffect, useState, type JSX } from "react";
+import rehypeReact from "rehype-react";
+import { unified } from "unified";
+import production from "react/jsx-runtime";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import { visit } from "unist-util-visit";
+import remarkDirective from "remark-directive";
+import type { Node } from "unist";
+import { h } from "hastscript";
 
 type MdNode = Node & {
-    name?: string,
-    attributes?: Record<string, string>,
-    data?: {
-        hName?: string,
-        hProperties?: Record<string, any>
-    }
-}
+  name?: string;
+  attributes?: Record<string, string>;
+  data?: {
+    hName?: string;
+    hProperties?: Record<string, unknown>;
+  };
+};
 
 function directiveHandler() {
-    /**
-     * @param {Root} tree
-     *   Tree.
-     * @returns {undefined}
-     *   Nothing.
-     */
-    return function (tree: MdNode) {
-        visit(tree, function (node) {
-            if (
-                node.type === 'containerDirective' ||
-                node.type === 'leafDirective' ||
-                node.type === 'textDirective'
-            ) {
-                if (node.name !== 'mycomponent') {
-                    return;
-                }
+  /**
+   * @param {Root} tree
+   *   Tree.
+   * @returns {undefined}
+   *   Nothing.
+   */
+  return function (tree: MdNode) {
+    visit(tree, function (node) {
+      if (
+        node.type === "containerDirective" ||
+        node.type === "leafDirective" ||
+        node.type === "textDirective"
+      ) {
+        if (node.name !== "mycomponent") {
+          return;
+        }
 
-                const data = node.data || (node.data = {})
-                const hast = h(node.name, node.attributes || {})
+        const data = node.data ?? (node.data = {});
+        const hast = h(node.name, node.attributes ?? {});
 
-                data.hName = hast.tagName
-                data.hProperties = hast.properties
-            }
-        })
-    }
+        data.hName = hast.tagName;
+        data.hProperties = hast.properties;
+      }
+    });
+  };
 }
 
-type Props = {
-    text: string;
+interface Props {
+  text: string;
 }
 
 export const MarkdownView = (props: Props) => {
-    const { text } = props
-    const [Content, setContent] = useState(createElement(Fragment))
+  const { text } = props;
+  const [Content, setContent] = useState(createElement(Fragment));
 
-    useEffect(() => {
-        (async function () {
-            const file = await unified()
-                .use(remarkParse)
-                .use(remarkDirective)
-                .use(directiveHandler)
-                .use(remarkRehype)
-                .use(rehypeReact, {
-                    ...production,
-                    components: {
-                        mycomponent: (props: any) => {
-                            console.log("props", props)
-                            const { prop1, prop2 } = props
-                            return <div>My Component: {prop1}, {prop2} <>{props.children}</></div>
-                        }
-                    }
-                })
-                .process(text)
+  useEffect(() => {
+    const update = async () => {
+      const processor = unified();
+      processor.use(remarkParse);
+      processor.use(remarkDirective);
+      processor.use(directiveHandler);
+      processor.use(remarkRehype);
+      processor.use(rehypeReact, {
+        ...production,
+        components: {
+          mycomponent: (props: {
+            prop1: string | undefined;
+            prop2: string | undefined;
+            children: JSX.Element | undefined;
+          }) => {
+            const { prop1, prop2, children } = props;
+            return (
+              <div>
+                My Component: {prop1}, {prop2} <>{children}</>
+              </div>
+            );
+          },
+        },
+      });
+      const file = await processor.process(text);
 
-            setContent(file.result)
-        })()
-    }, [text])
+      setContent(file.result as JSX.Element);
+    };
+    update().catch((err: unknown) => {
+      console.error("Error processing markdown:", err);
+    });
+  }, [text]);
 
-    return <>
-        <article className="prose prose-slate">
-            {Content}
-        </article>
+  return (
+    <>
+      <article className="prose prose-slate">{Content}</article>
     </>
-}
+  );
+};

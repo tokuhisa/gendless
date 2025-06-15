@@ -1,13 +1,13 @@
-import { useState } from 'react'
-import { MarkdownView } from './MarkdownView';
-
+import { useState } from "react";
+import { MarkdownView } from "./MarkdownView";
 
 function App() {
   const [name, setName] = useState("unknown");
 
   return (
     <>
-      <MarkdownView text={`
+      <MarkdownView
+        text={`
 # Markdown Example
 
 ::::mycomponent{prop1="hoge" prop2="fuga"}
@@ -22,13 +22,16 @@ test
 :::
 
 ::::
-      `} />
+      `}
+      />
       <button
-        type='button'
+        type="button"
         onClick={() => {
           fetch("/api/hono")
             .then((res) => res.json() as Promise<{ name: string }>)
-            .then((data) => { setName(data.name); })
+            .then((data) => {
+              setName(data.name);
+            })
             .catch((err: unknown) => {
               console.error("Error fetching name:", err);
             });
@@ -38,7 +41,7 @@ test
         Name from API is: {name}
       </button>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
