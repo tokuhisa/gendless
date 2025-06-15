@@ -14,9 +14,11 @@
     "install:api-worker": "npm uninstall gendless-api-worker && npm run build:api-worker && npm install \"../gendless-api-worker\" --install-links"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.1.10",
     "gendless-api-worker": "file:../gendless-api-worker",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "tailwindcss": "^4.1.10"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.5.0",
