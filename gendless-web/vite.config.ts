@@ -9,7 +9,10 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    cloudflare(),
+    cloudflare({
+      configPath: "./wrangler.jsonc",
+      experimental: { remoteBindings: true },
+    }),
     createViteLicensePlugin({
       excludedPackageTest: (packageName) => {
         return packageName.startsWith("gendless");

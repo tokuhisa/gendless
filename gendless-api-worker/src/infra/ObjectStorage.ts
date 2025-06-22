@@ -22,4 +22,8 @@ export class ObjectStorage {
       etag: obj.httpEtag,
     };
   }
+
+  async putObject(key: string, body: string): Promise<void> {
+    await this.bucket.put(key, body);
+  }
 }
