@@ -5,12 +5,15 @@
   "private": true,
   "scripts": {
     "build": "npm run cf-typegen && tsc",
-    "cf-typegen": "wrangler types src/worker-configuration.d.ts --env-interface CloudflareBindings --config ../gendless-web/wrangler.jsonc"
+    "cf-typegen": "wrangler types src/worker-configuration.d.ts --env-interface CloudflareBindings --config ../gendless-web/wrangler.jsonc",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "hono": "^4.7.11"
   },
   "devDependencies": {
+    "prettier": "3.5.3",
     "typescript": "^5.8.3",
     "wrangler": "^4.20.0"
   }

@@ -1,5 +1,4 @@
-
-export interface ObjectData { 
+export interface ObjectData {
   key: string;
   body: ReadableStream;
   etag: string;
