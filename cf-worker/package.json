@@ -1,11 +1,11 @@
 {
-  "name": "gendless-api-worker",
+  "name": "gendless-cf-worker",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "private": true,
   "scripts": {
     "build": "npm run cf-typegen && tsc",
-    "cf-typegen": "wrangler types src/worker-configuration.d.ts --env-interface CloudflareBindings --config ../gendless-web/wrangler.jsonc",
+    "cf-typegen": "wrangler types src/worker-configuration.d.ts --env-interface CloudflareBindings --config ../web-app/wrangler.jsonc",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },

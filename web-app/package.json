@@ -12,13 +12,13 @@
     "format:check": "prettier --check .",
     "preview": "vite preview",
     "deploy": "npm run build && wrangler deploy",
-    "build:api-worker": "npm run rm:api-worker && npm --prefix \"../gendless-api-worker\" run build && npm install",
-    "rm:api-worker": "node -e 'fs.rmSync(`node_modules/gendless-api-worker`, {recursive:true, force:true})'",
-    "install:api-worker": "npm install \"../gendless-api-worker\" --link"
+    "build:cf-worker": "npm run rm:cf-worker && npm --prefix \"../cf-worker\" run build && npm install",
+    "rm:cf-worker": "node -e 'fs.rmSync(`node_modules/gendless-cf-worker`, {recursive:true, force:true})'",
+    "install:cf-worker": "npm install \"../cf-worker\" --link"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.10",
-    "gendless-api-worker": "file:../gendless-api-worker",
+    "gendless-cf-worker": "file:../cf-worker",
     "hastscript": "^9.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
