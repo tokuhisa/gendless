@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "npm run build:api-worker && vite",
-    "build": "npm run build:api-worker && tsc -b && vite build",
+    "dev": "npm run build:cf-worker && vite",
+    "build": "npm run build:cf-worker && tsc -b && vite build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
