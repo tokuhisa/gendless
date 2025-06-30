@@ -25,6 +25,7 @@ export class LLMClient {
           content: prompt,
         },
       ],
+      max_tokens: 2048,
     } satisfies AiInputType;
 
     const options = {} satisfies AiOptions;
