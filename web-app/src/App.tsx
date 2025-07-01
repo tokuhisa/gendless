@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MarkdownView } from "./MarkdownView";
+import { MarkdownView } from "./components";
 
 function App() {
   const [text, setText] = useState(`# JavaScript実行テスト
