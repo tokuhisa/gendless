@@ -7,10 +7,13 @@
     "build": "npm run cf-typegen && tsc",
     "cf-typegen": "wrangler types src/worker-configuration.d.ts --env-interface CloudflareBindings --config ../web-app/wrangler.jsonc",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "api-spec:copy": "mkdir -p ./src/validation && rm -r ./src/validation/* && cp -r ../api-spec/dist/zod/* ./src/validation/",
+    "api-spec:build": "npm --prefix ../api-spec run build && npm run api-spec:copy"
   },
   "dependencies": {
-    "hono": "^4.7.11"
+    "hono": "^4.7.11",
+    "zod": "^3.25.67"
   },
   "devDependencies": {
     "prettier": "3.5.3",

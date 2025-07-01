@@ -1,11 +1,13 @@
 import { Hono } from "hono";
 import { getDocument } from "../domain/getDocument";
+import { documentIdGetParams } from "../validation/documents.gen";
+import { z } from "zod";
 
 export const getDocumentsId = new Hono<{ Bindings: CloudflareBindings }>().get(
-  "/documents/:id",
+  "/documents/:documentId",
   async (c) => {
-    const id = c.req.param("id");
-    const document = await getDocument(c.env, id);
+    const params = documentIdGetParams.parse(c.req.param());
+    const document = await getDocument(c.env, params.documentId);
     if (!document) {
       return c.notFound();
     }

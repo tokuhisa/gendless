@@ -34,3 +34,6 @@ lerna-debug.log*
 
 # wrangler
 worker-configuration.d.ts
+
+# API spec
+*.gen.ts
