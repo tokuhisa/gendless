@@ -1,7 +1,6 @@
 import { Hono } from "hono";
 import { getDocument } from "../domain/getDocument";
 import { documentIdGetParams } from "../validation/documents.gen";
-import { z } from "zod";
 
 export const getDocumentsId = new Hono<{ Bindings: CloudflareBindings }>().get(
   "/documents/:documentId",

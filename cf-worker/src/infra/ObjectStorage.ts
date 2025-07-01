@@ -8,7 +8,7 @@ export class ObjectStorage {
   private bucket: R2Bucket;
 
   constructor(env: CloudflareBindings) {
-    this.bucket = env.GENDLESS_BUCKET;
+    this.bucket = env.BUCKET;
   }
 
   async getObject(key: string): Promise<ObjectData | null> {
