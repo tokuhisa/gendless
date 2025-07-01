@@ -6,7 +6,7 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import remarkDirective from "remark-directive";
 import type { MarkdownViewProps } from "../../types";
-import { JavaScriptExecutor, MyComponent, TextInput, directiveHandler } from "./directives";
+import { JavaScriptExecutor, MyComponent, TextInput, Button, directiveHandler } from "./directives";
 
 export const MarkdownView = (props: MarkdownViewProps) => {
   const { text } = props;
@@ -25,6 +25,7 @@ export const MarkdownView = (props: MarkdownViewProps) => {
           mycomponent: MyComponent,
           js: JavaScriptExecutor,
           textinput: TextInput,
+          button: Button,
         },
       });
       const file = await processor.process(text);

@@ -42,6 +42,42 @@ console.log("配列の合計:", sum);
 年齢
 :::
 
+## ボタン要素
+
+### 基本的なボタン
+
+:::button
+クリックしてください
+:::
+
+### 様々なスタイルのボタン
+
+:::button{variant="primary" size="lg"}
+プライマリボタン（大）
+:::
+
+:::button{variant="secondary" size="md"}
+セカンダリボタン（中）
+:::
+
+:::button{variant="danger" size="sm"}
+危険なアクション（小）
+:::
+
+:::button{variant="success"}
+成功ボタン
+:::
+
+:::button{variant="outline"}
+アウトラインボタン
+:::
+
+### 無効化されたボタン
+
+:::button{disabled="true"}
+無効化されたボタン
+:::
+
 通常のMarkdownテキストも表示されます。`);
 
   return (

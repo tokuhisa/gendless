@@ -23,3 +23,11 @@ export interface TextInputProps {
   label?: string;
   children?: React.ReactNode;
 }
+
+export interface ButtonProps {
+  variant?: 'primary' | 'secondary' | 'danger' | 'success' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+  children?: React.ReactNode;
+}
