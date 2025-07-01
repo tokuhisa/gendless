@@ -2,7 +2,9 @@ import { useState } from "react";
 import { MarkdownView } from "./components";
 
 function App() {
-  const [text, setText] = useState(`# JavaScript実行テスト
+  const [text, setText] = useState(`# インタラクティブMarkdownテスト
+
+## JavaScript実行
 
 以下のJavaScriptコードが実行されます：
 
@@ -12,6 +14,32 @@ console.log("計算結果:", 2 + 3);
 const numbers = [1, 2, 3, 4, 5];
 const sum = numbers.reduce((a, b) => a + b, 0);
 console.log("配列の合計:", sum);
+:::
+
+## テキスト入力フォーム
+
+### 基本的な入力フィールド
+
+:::textinput{placeholder="お名前を入力してください"}
+お名前
+:::
+
+### メールアドレス入力
+
+:::textinput{type="email" placeholder="メールアドレス" required="true"}
+メールアドレス (必須)
+:::
+
+### パスワード入力
+
+:::textinput{type="password" placeholder="パスワードを入力" defaultValue=""}
+パスワード
+:::
+
+### 数値入力
+
+:::textinput{type="number" placeholder="年齢" defaultValue="25"}
+年齢
 :::
 
 通常のMarkdownテキストも表示されます。`);

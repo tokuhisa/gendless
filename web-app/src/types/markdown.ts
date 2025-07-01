@@ -12,3 +12,14 @@ export interface MyComponentProps {
   prop2?: string;
   children?: React.ReactNode;
 }
+
+export interface TextInputProps {
+  id?: string;
+  placeholder?: string;
+  defaultValue?: string;
+  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
+  required?: boolean;
+  disabled?: boolean;
+  label?: string;
+  children?: React.ReactNode;
+}
