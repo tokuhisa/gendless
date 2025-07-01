@@ -1,5 +1,6 @@
-import { useState, useId } from "react";
+import { useState, useId, useEffect } from "react";
 import type { TextInputProps } from "../../../types";
+import { useMarkdownContext } from "../context";
 
 /**
  * Interactive text input component for Markdown directives
@@ -20,15 +21,25 @@ export const TextInput = (props: TextInputProps) => {
   const [isDirty, setIsDirty] = useState(false);
   const generatedId = useId();
   const inputId = id ?? generatedId;
+  const { setInputValue } = useMarkdownContext();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
+    const newValue = event.target.value;
+    setValue(newValue);
     setIsDirty(true);
+    // Store value in context for access by other components
+    setInputValue(inputId, newValue);
   };
+
+  // Initialize context value
+  useEffect(() => {
+    setInputValue(inputId, value);
+  }, [inputId, value, setInputValue]);
 
   const handleReset = () => {
     setValue(defaultValue);
     setIsDirty(false);
+    setInputValue(inputId, defaultValue);
   };
 
   const labelText = label ?? (children && typeof children === 'string' ? children : undefined);

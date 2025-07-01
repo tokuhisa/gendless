@@ -6,7 +6,8 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import remarkDirective from "remark-directive";
 import type { MarkdownViewProps } from "../../types";
-import { JavaScriptExecutor, MyComponent, TextInput, Button, directiveHandler } from "./directives";
+import { JavaScriptExecutor, MyComponent, TextInput, Button, ResultDisplay, directiveHandler } from "./directives";
+import { MarkdownContextProvider } from "./context";
 
 export const MarkdownView = (props: MarkdownViewProps) => {
   const { text } = props;
@@ -26,6 +27,7 @@ export const MarkdownView = (props: MarkdownViewProps) => {
           js: JavaScriptExecutor,
           textinput: TextInput,
           button: Button,
+          resultdisplay: ResultDisplay,
         },
       });
       const file = await processor.process(text);
@@ -38,8 +40,8 @@ export const MarkdownView = (props: MarkdownViewProps) => {
   }, [text]);
 
   return (
-    <>
+    <MarkdownContextProvider>
       <article className="prose prose-slate">{Content}</article>
-    </>
+    </MarkdownContextProvider>
   );
 };

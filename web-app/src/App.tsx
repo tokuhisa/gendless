@@ -78,6 +78,28 @@ console.log("配列の合計:", sum);
 無効化されたボタン
 :::
 
+## インタラクティブ計算機能
+
+### BMI計算機
+
+身長と体重を入力してBMIを計算できます：
+
+:::textinput{id="height" type="number" placeholder="170" defaultValue="170"}
+身長 (cm)
+:::
+
+:::textinput{id="weight" type="number" placeholder="65" defaultValue="65"}
+体重 (kg)
+:::
+
+:::button{variant="primary" execute="const height = parseFloat(inputs.height) / 100; const weight = parseFloat(inputs.weight); const bmi = weight / (height * height); console.log('身長:', inputs.height + 'cm'); console.log('体重:', inputs.weight + 'kg'); console.log('BMI:', bmi.toFixed(2)); bmi.toFixed(2);" resultId="bmi-result"}
+BMI計算
+:::
+
+:::resultdisplay{resultId="bmi-result"}
+BMI計算結果がここに表示されます
+:::
+
 通常のMarkdownテキストも表示されます。`);
 
   return (

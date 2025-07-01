@@ -13,7 +13,7 @@ export function directiveHandler() {
         node.type === "leafDirective" ||
         node.type === "textDirective"
       ) {
-        if (node.name !== "mycomponent" && node.name !== "js" && node.name !== "textinput" && node.name !== "button") {
+        if (node.name !== "mycomponent" && node.name !== "js" && node.name !== "textinput" && node.name !== "button" && node.name !== "resultdisplay") {
           return;
         }
 

@@ -29,5 +29,12 @@ export interface ButtonProps {
   size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
+  execute?: string; // JavaScript code to execute
+  resultId?: string; // ID to store execution result
+  children?: React.ReactNode;
+}
+
+export interface ResultDisplayProps {
+  resultId?: string;
   children?: React.ReactNode;
 }
