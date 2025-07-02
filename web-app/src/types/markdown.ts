@@ -5,6 +5,7 @@ export interface MarkdownViewProps {
 export interface JavaScriptExecutorProps {
   children?: React.ReactNode;
   codeContent?: string;
+  resultId?: string; // ID to listen for execution triggers
 }
 
 export interface MyComponentProps {
@@ -29,8 +30,7 @@ export interface ButtonProps {
   size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
-  execute?: string; // JavaScript code to execute
-  resultId?: string; // ID to store execution result
+  resultId?: string; // ID to trigger JavaScript execution
   children?: React.ReactNode;
 }
 

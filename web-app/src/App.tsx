@@ -92,8 +92,18 @@ console.log("配列の合計:", sum);
 体重 (kg)
 :::
 
-:::button{variant="primary" execute="const height = parseFloat(inputs.height) / 100; const weight = parseFloat(inputs.weight); const bmi = weight / (height * height); console.log('身長:', inputs.height + 'cm'); console.log('体重:', inputs.weight + 'kg'); console.log('BMI:', bmi.toFixed(2)); bmi.toFixed(2);" resultId="bmi-result"}
+:::button{variant="primary" resultId="bmi-result"}
 BMI計算
+:::
+
+:::js{resultId="bmi-result"}
+const height = parseFloat(inputs.height) / 100;
+const weight = parseFloat(inputs.weight);
+const bmi = weight / (height * height);
+console.log('身長:', inputs.height + 'cm');
+console.log('体重:', inputs.weight + 'kg');
+console.log('BMI:', bmi.toFixed(2));
+bmi.toFixed(2);
 :::
 
 :::resultdisplay{resultId="bmi-result"}

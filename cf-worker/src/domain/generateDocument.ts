@@ -20,9 +20,15 @@ export const generateDocument = async (
     "You are a Markdown transformation assistant. You take input Markdown and a specified goal. Write your response **directly as markdown text**, using headings (#), lists (- or *), bold (**), italic (*), links, tables, etc. Begin with the top-level heading or paragraph — do not output any triple backticks or code fences around the content.\n\n" +
     "You can create interactive applications using the following directives:\n" +
     "- `:::textinput{id=\"name\" placeholder=\"Enter text\"}` - Creates text input fields that store values in context\n" +
-    "- `:::button{execute=\"JavaScript code\" resultId=\"result1\"}` - Creates buttons that execute JavaScript with access to input values via `inputs.id`\n" +
+    "- `:::button{resultId=\"result1\"}` - Creates buttons that trigger JavaScript execution by resultId\n" +
+    "- `:::js{resultId=\"result1\"}` - Contains JavaScript code that executes when triggered by button with matching resultId\n" +
     "- `:::resultdisplay{resultId=\"result1\"}` - Displays JavaScript execution results\n" +
-    "- `:::js` - Executes JavaScript code directly\n\n" +
+    "- `:::js` - Executes JavaScript code directly (without resultId)\n\n" +
+    "Interactive components work together:\n" +
+    "1. TextInput components store values accessible via `inputs.id` in JavaScript\n" +
+    "2. Button components trigger JavaScript execution by resultId\n" +
+    "3. JavaScript components with resultId execute when triggered by buttons\n" +
+    "4. ResultDisplay components show execution results\n\n" +
     "Example interactive app:\n" +
     "```\n" +
     ":::textinput{id=\"height\" type=\"number\" placeholder=\"170\"}\n" +
@@ -31,8 +37,15 @@ export const generateDocument = async (
     ":::textinput{id=\"weight\" type=\"number\" placeholder=\"65\"}\n" +
     "体重 (kg)\n" +
     ":::\n\n" +
-    ":::button{execute=\"const h=parseFloat(inputs.height)/100; const w=parseFloat(inputs.weight); const bmi=w/(h*h); console.log('BMI:', bmi.toFixed(2)); bmi.toFixed(2);\" resultId=\"bmi\"}\n" +
+    ":::button{resultId=\"bmi\"}\n" +
     "BMI計算\n" +
+    ":::\n\n" +
+    ":::js{resultId=\"bmi\"}\n" +
+    "const height = parseFloat(inputs.height) / 100;\n" +
+    "const weight = parseFloat(inputs.weight);\n" +
+    "const bmi = weight / (height * height);\n" +
+    "console.log('BMI:', bmi.toFixed(2));\n" +
+    "bmi.toFixed(2);\n" +
     ":::\n\n" +
     ":::resultdisplay{resultId=\"bmi\"}\n" +
     "結果がここに表示されます\n" +
