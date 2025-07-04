@@ -22,7 +22,7 @@ export const handleButtonNode = (
 export interface Props {
   variant?: 'primary' | 'secondary' | 'danger' | 'success' | 'outline';
   size?: 'sm' | 'md' | 'lg';
-  disabled?: boolean;
+  disabled?: "true" | "false";
   type?: 'button' | 'submit' | 'reset';
   eventId?: string; // ID to trigger JavaScript execution
   children?: React.ReactNode;
@@ -94,7 +94,7 @@ export const Button = (props: Props) => {
   return (
     <button
       type={type}
-      disabled={disabled}
+      disabled={disabled === "true"}
       onClick={handleClick}
       className={`${getVariantClasses()} ${getSizeClasses()} my-2`}
     >
