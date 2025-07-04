@@ -14,69 +14,52 @@ console.log("計算結果:", 2 + 3);
 const numbers = [1, 2, 3, 4, 5];
 const sum = numbers.reduce((a, b) => a + b, 0);
 console.log("配列の合計:", sum);
+
+- 1
+- 2
+
 :::
 
 ## テキスト入力フォーム
 
 ### 基本的な入力フィールド
 
-:::textinput{placeholder="お名前を入力してください"}
-お名前
-:::
+::textinput[お名前]{placeholder="お名前を入力してください"}
 
 ### メールアドレス入力
 
-:::textinput{type="email" placeholder="メールアドレス" required="true"}
-メールアドレス (必須)
-:::
+::textinput[メールアドレス (必須)]{type="email" placeholder="メールアドレス" required="true"}
 
 ### パスワード入力
 
-:::textinput{type="password" placeholder="パスワードを入力" defaultValue=""}
-パスワード
-:::
+::textinput[パスワード]{type="password" placeholder="パスワードを入力" defaultValue=""}
 
 ### 数値入力
 
-:::textinput{type="number" placeholder="年齢" defaultValue="25"}
-年齢
-:::
+::textinput[年齢]{type="number" placeholder="年齢" defaultValue="25"}
 
 ## ボタン要素
 
 ### 基本的なボタン
 
-:::button
-クリックしてください
-:::
+::button[クリックしてください]
 
 ### 様々なスタイルのボタン
 
-:::button{variant="primary" size="lg"}
-プライマリボタン（大）
-:::
+::button[プライマリボタン（大）]{variant="primary" size="lg"}
 
-:::button{variant="secondary" size="md"}
-セカンダリボタン（中）
-:::
 
-:::button{variant="danger" size="sm"}
-危険なアクション（小）
-:::
+::button[セカンダリボタン（中）]{variant="secondary" size="md"}
 
-:::button{variant="success"}
-成功ボタン
-:::
+::button[危険なアクション（小）]{variant="danger" size="sm"}
 
-:::button{variant="outline"}
-アウトラインボタン
-:::
+::button[成功ボタン]{variant="success"}
+
+::button[アウトラインボタン]{variant="outline"}
 
 ### 無効化されたボタン
 
-:::button{disabled="true"}
-無効化されたボタン
-:::
+::button[無効化されたボタン]{disabled="true"}
 
 ## インタラクティブ計算機能
 
@@ -84,19 +67,13 @@ console.log("配列の合計:", sum);
 
 身長と体重を入力してBMIを計算できます：
 
-:::textinput{id="height" type="number" placeholder="170" defaultValue="170"}
-身長 (cm)
-:::
+::textinput[身長 (cm)]{id="height" type="number" placeholder="170" defaultValue="170"}
 
-:::textinput{id="weight" type="number" placeholder="65" defaultValue="65"}
-体重 (kg)
-:::
+::textinput[体重 (kg)]{id="weight" type="number" placeholder="65" defaultValue="65"}
 
-:::button{variant="primary" resultId="bmi-result"}
-BMI計算
-:::
+::button[BMI計算]{variant="primary" eventId="bmi-calculator"}
 
-:::js{resultId="bmi-result"}
+:::js{eventId="bmi-calculator" resultId="bmi-result"}
 const height = parseFloat(inputs.height) / 100;
 const weight = parseFloat(inputs.weight);
 const bmi = weight / (height * height);
@@ -106,15 +83,16 @@ console.log('BMI:', bmi.toFixed(2));
 bmi.toFixed(2);
 :::
 
-:::resultdisplay{resultId="bmi-result"}
-BMI計算結果がここに表示されます
-:::
+::resultdisplay[BMI計算結果がここに表示されます]{resultId="bmi-result"}
+
 
 通常のMarkdownテキストも表示されます。`);
 
   return (
     <>
+    <div className="p-4">
       <MarkdownView text={text} />
+    </div>
       <button
         type="button"
         onClick={() => {

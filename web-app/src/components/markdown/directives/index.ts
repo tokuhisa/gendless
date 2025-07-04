@@ -1,6 +1,12 @@
-export { JavaScriptExecutor } from './JavaScriptExecutor';
-export { MyComponent } from './MyComponent';
-export { TextInput } from './TextInput';
-export { Button } from './Button';
-export { ResultDisplay } from './ResultDisplay';
+import { Button } from './Button';
+import { JavaScriptExecutor } from './JavaScriptExecutor';
+import { ResultDisplay } from './ResultDisplay';
+import { TextInput } from './TextInput';
+
 export { directiveHandler } from './directiveHandler';
+export const components = {
+  js: JavaScriptExecutor,
+  textinput: TextInput,
+  button: Button,
+  resultdisplay: ResultDisplay,
+};

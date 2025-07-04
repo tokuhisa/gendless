@@ -1,11 +1,39 @@
 import { useState, useId, useEffect } from "react";
-import type { TextInputProps } from "../../../types";
 import { useMarkdownContext } from "../context";
+import type {
+  ContainerDirective,
+  LeafDirective,
+  TextDirective,
+} from "mdast-util-directive";
+import { setupDirectiveNode } from "../../../utils/directive";
+
+export const handleTextInputNode = (
+  node: ContainerDirective | LeafDirective | TextDirective,
+) => {
+  if (node.name !== "textinput") {
+    return;
+  }
+  if (node.type !== "leafDirective" && node.type !== "textDirective") {
+    return;
+  }
+  setupDirectiveNode(node);
+};
+
+export interface Props {
+  id?: string;
+  placeholder?: string;
+  defaultValue?: string;
+  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
+  required?: "true" | "false";
+  disabled?: "true" | "false";
+  label?: string;
+  children?: React.ReactNode;
+}
 
 /**
  * Interactive text input component for Markdown directives
  */
-export const TextInput = (props: TextInputProps) => {
+export const TextInput = (props: Props) => {
   const {
     id,
     placeholder = "Enter text...",
@@ -61,8 +89,8 @@ export const TextInput = (props: TextInputProps) => {
             value={value}
             onChange={handleChange}
             placeholder={placeholder}
-            required={required}
-            disabled={disabled}
+            required={required === "true"}
+            disabled={disabled === "true"}
             className="flex-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-50 disabled:text-gray-500"
           />
           

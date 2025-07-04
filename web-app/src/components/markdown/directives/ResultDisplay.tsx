@@ -1,10 +1,32 @@
-import type { ResultDisplayProps } from "../../../types";
 import { useMarkdownContext } from "../context";
+import type {
+  ContainerDirective,
+  LeafDirective,
+  TextDirective,
+} from "mdast-util-directive";
+import { setupDirectiveNode } from "../../../utils/directive";
+
+export const handleResultDisplayNode = (
+  node: ContainerDirective | LeafDirective | TextDirective,
+) => {
+  if (node.name !== "resultdisplay") {
+    return;
+  }
+  if (node.type !== "leafDirective" && node.type !== "textDirective") {
+    return;
+  }
+  setupDirectiveNode(node);
+};
+
+export interface Props {
+  resultId?: string;
+  children?: React.ReactNode;
+}
 
 /**
  * Component to display JavaScript execution results
  */
-export const ResultDisplay = (props: ResultDisplayProps) => {
+export const ResultDisplay = (props: Props) => {
   const { resultId, children } = props;
   const { executionResults } = useMarkdownContext();
 

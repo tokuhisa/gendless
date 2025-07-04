@@ -5,10 +5,8 @@ interface MarkdownContextValue {
   setInputValue: (id: string, value: string) => void;
   executionResults: Record<string, unknown>;
   setExecutionResult: (id: string, result: unknown) => void;
-  triggerJavaScriptExecution: (resultId: string) => void;
+  dispatchEvent: (eventId: string) => void;
   executionTriggers: Record<string, { timestamp: number }>;
-  registerJavaScriptCode: (resultId: string, code: string) => void;
-  javascriptCode: Record<string, string>;
 }
 
 const MarkdownContext = createContext<MarkdownContextValue | undefined>(undefined);
@@ -29,7 +27,6 @@ export const MarkdownContextProvider = ({ children }: MarkdownContextProviderPro
   const [inputValues, setInputValues] = useState<Record<string, string>>({});
   const [executionResults, setExecutionResults] = useState<Record<string, unknown>>({});
   const [executionTriggers, setExecutionTriggers] = useState<Record<string, { timestamp: number }>>({});
-  const [javascriptCode, setJavascriptCode] = useState<Record<string, string>>({});
 
   const setInputValue = useCallback((id: string, value: string) => {
     setInputValues(prev => ({ ...prev, [id]: value }));
@@ -39,15 +36,12 @@ export const MarkdownContextProvider = ({ children }: MarkdownContextProviderPro
     setExecutionResults(prev => ({ ...prev, [id]: result }));
   }, []);
 
-  const triggerJavaScriptExecution = useCallback((resultId: string) => {
-    setExecutionTriggers(prev => ({ 
-      ...prev, 
-      [resultId]: { timestamp: Date.now() }
+  const dispatchEvent = useCallback((eventId: string) => {
+    console.log(`Dispatching event: ${eventId}`);
+    setExecutionTriggers(prev => ({
+      ...prev,
+      [eventId]: { timestamp: Date.now() }
     }));
-  }, []);
-
-  const registerJavaScriptCode = useCallback((resultId: string, code: string) => {
-    setJavascriptCode(prev => ({ ...prev, [resultId]: code }));
   }, []);
 
   return (
@@ -57,10 +51,8 @@ export const MarkdownContextProvider = ({ children }: MarkdownContextProviderPro
         setInputValue,
         executionResults,
         setExecutionResult,
-        triggerJavaScriptExecution,
+        dispatchEvent,
         executionTriggers,
-        registerJavaScriptCode,
-        javascriptCode,
       }}
     >
       {children}

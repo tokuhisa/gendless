@@ -1,27 +1,57 @@
-import type { ButtonProps } from "../../../types";
+import { setupDirectiveNode } from "../../../utils/directive";
 import { useMarkdownContext } from "../context";
+import type {
+  ContainerDirective,
+  LeafDirective,
+  TextDirective,
+} from "mdast-util-directive";
+
+export const handleButtonNode = (
+  node: ContainerDirective | LeafDirective | TextDirective,
+) => {
+  if (node.name !== "button") {
+    return;
+  }
+  if (node.type !== "leafDirective" && node.type !== "textDirective") {
+    return;
+  }
+  setupDirectiveNode(node);
+};
+
+
+export interface Props {
+  variant?: 'primary' | 'secondary' | 'danger' | 'success' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+  eventId?: string; // ID to trigger JavaScript execution
+  children?: React.ReactNode;
+}
 
 /**
  * Interactive button component for Markdown directives
  */
-export const Button = (props: ButtonProps) => {
+export const Button = (props: Props) => {
   const {
     variant = "primary",
     size = "md",
     disabled = false,
     type = "button",
-    resultId,
+    eventId,
     children
   } = props;
 
-  const { triggerJavaScriptExecution } = useMarkdownContext();
+  const { dispatchEvent } = useMarkdownContext();
 
   const handleClick = () => {
-    if (disabled) return;
-    
-    // Trigger JavaScript execution by resultId
-    if (resultId) {
-      triggerJavaScriptExecution(resultId);
+    if (disabled) {
+      return;
+    }
+
+    // Trigger JavaScript execution by eventId
+    if (eventId) {
+      console.log(`Button clicked, dispatching event: ${eventId}`);
+      dispatchEvent(eventId);
     }
   };
 

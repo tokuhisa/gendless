@@ -5,11 +5,14 @@ import production from "react/jsx-runtime";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import remarkDirective from "remark-directive";
-import type { MarkdownViewProps } from "../../types";
-import { JavaScriptExecutor, MyComponent, TextInput, Button, ResultDisplay, directiveHandler } from "./directives";
+import { directiveHandler, components } from "./directives";
 import { MarkdownContextProvider } from "./context";
 
-export const MarkdownView = (props: MarkdownViewProps) => {
+export interface Props {
+  text: string;
+}
+
+export const MarkdownView = (props: Props) => {
   const { text } = props;
   const [Content, setContent] = useState(createElement(Fragment));
 
@@ -22,13 +25,7 @@ export const MarkdownView = (props: MarkdownViewProps) => {
       processor.use(remarkRehype);
       processor.use(rehypeReact, {
         ...production,
-        components: {
-          mycomponent: MyComponent,
-          js: JavaScriptExecutor,
-          textinput: TextInput,
-          button: Button,
-          resultdisplay: ResultDisplay,
-        },
+        components: components,
       });
       const file = await processor.process(text);
 
