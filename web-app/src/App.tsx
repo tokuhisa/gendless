@@ -90,11 +90,17 @@ bmi.toFixed(2);
 
   return (
     <>
+    <div className="w-full flex mx-auto justify-center">
+      
     <div className="p-4">
       <MarkdownView text={text} />
     </div>
+    </div>
+    <div className="w-full max-w-2xl mx-auto gap-2 flex flex-row">
+
       <button
         type="button"
+        className="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
         onClick={() => {
           fetch("/api/documents/example.md")
             .then((res) => res.text())
@@ -110,6 +116,7 @@ bmi.toFixed(2);
       </button>
       <button
         type="button"
+        className="mb-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
         onClick={() => {
           fetch("/api/documents", {
             method: "POST",
@@ -133,6 +140,7 @@ bmi.toFixed(2);
       >
         Geneate Markdown Text
       </button>
+    </div>
     </>
   );
 }

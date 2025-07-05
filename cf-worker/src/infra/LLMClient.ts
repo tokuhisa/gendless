@@ -17,6 +17,7 @@ export class LLMClient {
     systemPrompt: string,
     prompt: string,
   ): Promise<GenerationResult> {
+    console.log(systemPrompt, prompt);
     const input = {
       messages: [
         { role: "system", content: systemPrompt },
