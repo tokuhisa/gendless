@@ -6,6 +6,7 @@ import tseslint from "typescript-eslint";
 import reactX from "eslint-plugin-react-x";
 import reactDom from "eslint-plugin-react-dom";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
+import pluginRouter from '@tanstack/eslint-plugin-router'
 
 export default tseslint.config(
   { ignores: ["dist"] },
@@ -46,4 +47,5 @@ export default tseslint.config(
     },
   },
   eslintConfigPrettier,
+  ...pluginRouter.configs['flat/recommended'],
 );

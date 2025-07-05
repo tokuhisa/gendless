@@ -1,5 +1,15 @@
+import { createFileRoute } from '@tanstack/react-router'
+
 import { useState } from "react";
-import { MarkdownView } from "./components";
+import { MarkdownView } from "../components";
+
+export const Route = createFileRoute('/artifacts/$artifactsId')({
+  component: RouteComponent,
+})
+
+function RouteComponent() {
+  return <App />
+}
 
 function App() {
   const [text, setText] = useState(`# インタラクティブMarkdownテスト
@@ -144,5 +154,3 @@ bmi.toFixed(2);
     </>
   );
 }
-
-export default App;
