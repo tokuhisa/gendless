@@ -9,9 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as EditorRouteImport } from './routes/editor'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ArtifactsArtifactsIdRouteImport } from './routes/artifacts.$artifactsId'
 
+const EditorRoute = EditorRouteImport.update({
+  id: '/editor',
+  path: '/editor',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -25,32 +31,43 @@ const ArtifactsArtifactsIdRoute = ArtifactsArtifactsIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/editor': typeof EditorRoute
   '/artifacts/$artifactsId': typeof ArtifactsArtifactsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/editor': typeof EditorRoute
   '/artifacts/$artifactsId': typeof ArtifactsArtifactsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/editor': typeof EditorRoute
   '/artifacts/$artifactsId': typeof ArtifactsArtifactsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/artifacts/$artifactsId'
+  fullPaths: '/' | '/editor' | '/artifacts/$artifactsId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/artifacts/$artifactsId'
-  id: '__root__' | '/' | '/artifacts/$artifactsId'
+  to: '/' | '/editor' | '/artifacts/$artifactsId'
+  id: '__root__' | '/' | '/editor' | '/artifacts/$artifactsId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EditorRoute: typeof EditorRoute
   ArtifactsArtifactsIdRoute: typeof ArtifactsArtifactsIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/editor': {
+      id: '/editor'
+      path: '/editor'
+      fullPath: '/editor'
+      preLoaderRoute: typeof EditorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EditorRoute: EditorRoute,
   ArtifactsArtifactsIdRoute: ArtifactsArtifactsIdRoute,
 }
 export const routeTree = rootRouteImport
