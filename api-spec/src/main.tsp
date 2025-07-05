@@ -9,6 +9,10 @@ model VersionModel {
   version: string;
 }
 
+model ArtifactModel {
+  artifactId: string;
+}
+
 model DocumentModel {
   content: string;
 }
